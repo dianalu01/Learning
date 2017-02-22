@@ -1,0 +1,42 @@
+
+create table  Documento (
+idDoc serial  PRIMARY KEY,
+nombre char(20),
+ultimaVersion integer,
+docUltimaVersion bytea
+
+);
+create table  Linea (
+idLin serial PRIMARY KEY,
+idDocumento integer REFERENCES Documento (idDoc),
+idUsuario integer REFERENCES Usuarios (idUser),
+version char(4), 
+nroLinea integer,
+linea char(255)
+);
+
+create table Usuarios(
+idUser serial  PRIMARY KEY,
+nombre char (25),
+contraseña char(25)
+);
+
+create table Registro(
+id character(2) PRIMARY KEY,
+idU serial REFERENCES Usuarios(idUser),
+idD serial REFERENCES Documento (idDoc),
+Permiso char(25)
+);
+create table Diferencia(
+idDif serial   PRIMARY KEY  ,
+idLinea integer REFERENCES Linea(idLin),
+caracterInicio char(3),
+caracterFin char(3)
+);
+
+CREATE TABLE "tipoReg"
+(
+  id character(3) NOT NULL PRIMARY KEY,
+  tipo character(15)
+  
+)
